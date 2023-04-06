@@ -270,6 +270,7 @@ version = "0.1.0"
 dependencies = [
  "patch",
  "quick-junit",
+ "scanf",
 ]
 
 [[package]]
@@ -311,6 +312,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4424af4bf778aae2051a77b60283332f386554255d722233d09fbfc7e30da2fc"
 dependencies = [
  "proc-macro2",
+]
+
+[[package]]
+name = "scanf"
+version = "1.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1af23b806e681b4f838a9887655219b755a418f60353968a88b0b87a35b3e8ce"
+dependencies = [
+ "nom",
 ]
 
 [[package]]
