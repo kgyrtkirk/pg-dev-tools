@@ -1,0 +1,7 @@
+
+[workspace]
+members = [ "pgr2junit" ]
+
+
+#[dependencies]
+#pgr2junit = { path = "pgr2junit" }
