@@ -17,10 +17,11 @@ jobs:
         target: [x86_64-pc-windows-gnu, x86_64-unknown-linux-musl]
     steps:
       - uses: actions/checkout@master
-      - name: Compile and release
+      - name: Release pgr2junit
         uses: rust-build/rust-build.action@v1.4.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SRC_DIR: 'pgr2junit'
         with:
           RUSTTARGET: ${{ matrix.target }}
-          EXTRA_FILES: "README.md"
+          #EXTRA_FILES: "README.md"
