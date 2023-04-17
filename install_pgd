@@ -1,0 +1,20 @@
+#!/bin/bash
+set -e
+
+D=~/.local/pgd
+mkdir -p ~/bin
+mkdir -p "$D"
+cd "$D"
+zip="$(curl -s https://api.github.com/repos/kgyrtkirk/pg-dev-tools/releases/latest|
+	grep linux-musl|
+	grep 'zip"$'|
+	cut -d '"' -f 4)"
+echo "* using: $zip"
+wget -nv -c "$zip"
+n="$(basename "$zip")"
+v="$(basename $(dirname "$zip"))"
+mkdir -p "$v"
+cd "$v"
+unzip -o "../$n"
+cp -ft ~/bin -s $PWD/*
+
