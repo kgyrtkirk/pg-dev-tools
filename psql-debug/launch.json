@@ -1,0 +1,93 @@
+// needs extension: augustocdias.tasks-shell-input
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Attach / pick pid",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "/home/dev/pg/current/bin/postgres",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Attach - pgsql/auto",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "/home/dev/pg/current/bin/postgres",
+            "MIMode": "gdb",
+            "processId": "${input:pidFile}",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Attach - pgsql/auto+wait",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "/home/dev/pg/current/bin/postgres",
+            "MIMode": "gdb",
+            "processId": "${input:pidWait}",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+    ],
+    "inputs": [
+        {
+            "id": "pidFile0",
+            "type": "command",
+            "command": "extension.commandvariable.file.content",
+            "args": {
+                "fileName": "/tmp/_pgsql_debug_pid"
+            }
+        },
+        {
+            "id": "pidFile",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "useFirstResult": "true",
+                "command": "cat /tmp/_pgsql_debug_pid"
+            }
+        },
+        {
+            "id": "pidWait",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "useFirstResult": "true",
+                "command": "nc localhost 5555"
+            }
+        }
+    ]
+}
